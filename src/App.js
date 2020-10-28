@@ -24,7 +24,7 @@
 
 // export default App;
 
-
+// socketClient
 import React, { useState, useEffect } from "react";
 import socketIOClient from "socket.io-client";
 const ENDPOINT = "http://localhost:4001";
@@ -36,6 +36,9 @@ function App() {
     const socket = socketIOClient(ENDPOINT);
     socket.on("FromAPI", data => {
       setResponse(data);
+    });
+    socket.on('with-binary',(a1, a2, a3) => {
+      console.log(a1, a2, a3);
     });
   }, []);
 

@@ -11,13 +11,16 @@ const server = http.createServer(app);
 const io = socketIo(server);
 
 let interval;
+// io.sockets
+// socket.broadcast
 
 io.on("connection", (socket) => {
-  console.log("New client connected");
+  console.log("New client connected", socket.id);
   if (interval) {
     clearInterval(interval);
   }
   interval = setInterval(() => getApiAndEmit(socket), 1000);
+  socket.emit('with-binary', 1, '2', { 3: '4', 5: Buffer.from([6, 7, 8]) });
   socket.on("disconnect", () => {
     console.log("Client disconnected");
     clearInterval(interval);
