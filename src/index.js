@@ -3,13 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import MenuList from './first_page'
 
-const el = <MenuList/>;
 ReactDOM.render(
   <React.StrictMode>
-    {/* <App /> */}
-    {el}
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
