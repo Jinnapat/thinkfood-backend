@@ -33,13 +33,22 @@ function App() {
   const [response, setResponse] = useState("");
 
   useEffect(() => {
-    const socket = socketIOClient(ENDPOINT);
+    const socket = socketIOClient(`${ENDPOINT}/server`,{
+      query: {
+        type: 'testaccount',
+        ID: 1234
+      }
+    });
     socket.on("FromAPI", data => {
       setResponse(data);
     });
     socket.on('with-binary',(a1, a2, a3) => {
       console.log(a1, a2, a3);
     });
+    socket.on('loged', (mess) =>{
+      console.log(mess);
+    });
+
   }, []);
 
   return (
