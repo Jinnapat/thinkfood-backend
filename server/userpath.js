@@ -1,11 +1,12 @@
 var express = require("express");
 var app = express.Router();
-
+var pool = require('./pool');
 
 
 app.post("/getprofile", (req, res) => {
-    const userType = req.session.userType;
-    const id = req.session.userID;
+    var decoded = jwt.verify(req.body.token, 'secret');
+    const id = decoded.userID;
+    const userType = decoded.accountType;
     // EDIT: in case userType change, use condition to select table to be queried
     var sqlcommand =`select * from ${userType} where id = ${id};`;
 
